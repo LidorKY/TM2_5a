@@ -25,7 +25,8 @@ public:
     class AscendingIterator
     {
     private:
-        // Add any private members here
+        size_t index;
+        MagicalContainer *pointer_container;
 
     public:
         /* Constructors */
@@ -61,7 +62,8 @@ public:
     class SideCrossIterator
     {
     private:
-        // Add any private members here
+        size_t index;
+        MagicalContainer *pointer_container;
 
     public:
         /* Constructors */
@@ -97,7 +99,8 @@ public:
     class PrimeIterator
     {
     private:
-        // Add any private members here
+        size_t index;
+        MagicalContainer *pointer_container;
 
     public:
         /* Constructors */

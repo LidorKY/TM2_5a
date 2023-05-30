@@ -6,98 +6,150 @@ using namespace std;
 
 MagicalContainer::MagicalContainer()
 {
-    // Default constructor
+    this->container = vector<int>();
 }
 
 void MagicalContainer::addElement(int num)
 {
-    // Add element to container
+    for (int i = 0; i < this->container.size(); i++)
+    {
+        if (this->container[i] > num)
+        {
+            this->container.insert(this->container.begin() + i, num);
+            return;
+        }
+    }
+    this->container.emplace_back(num);
 }
 
 void MagicalContainer::removeElement(int num)
 {
-    // Remove element from container
+    for (int i = 0; i < this->container.size(); i++)
+    {
+        if (this->container[i] == num)
+        {
+            this->container.erase(this->container.begin() + i);
+            return;
+        }
+    }
+    throw "Element not found";
 }
 
 int MagicalContainer::size()
 {
     // Return size of container
-    return 0;
+    return this->container.size();
 }
 
 /* AscendingIterator */
 
 MagicalContainer::AscendingIterator::AscendingIterator()
 {
-    // Default constructor
+    this->index = 0;
+    this->pointer_container = nullptr;
 }
 
 MagicalContainer::AscendingIterator::AscendingIterator(MagicalContainer container)
 {
-    // Constructor with container argument
+    this->index = 0;
+    this->pointer_container = &container;
 }
 
 MagicalContainer::AscendingIterator::AscendingIterator(const AscendingIterator &other)
 {
     // Copy constructor
+    this->index = other.index;
+    this->pointer_container = other.pointer_container;
 }
 
 MagicalContainer::AscendingIterator::AscendingIterator(AscendingIterator &&other) noexcept
 {
     // Move constructor
+    this->index = other.index;
+    this->pointer_container = other.pointer_container;
 }
 
 MagicalContainer::AscendingIterator::~AscendingIterator()
 {
     // Destructor
+    this->index = 0;
+    this->pointer_container = nullptr;
 }
 
 MagicalContainer::AscendingIterator &MagicalContainer::AscendingIterator::operator=(const AscendingIterator &other)
 {
     // Assignment operator
+    if (this == &other)
+    {
+        return *this;
+    }
+    else
+    {
+        this->index = other.index;
+        this->pointer_container = other.pointer_container;
+    }
     return *this;
 }
 
 MagicalContainer::AscendingIterator &MagicalContainer::AscendingIterator::operator=(AscendingIterator &&other) noexcept
 {
     // Move assignment operator
+    if (this == &other)
+    {
+        return *this;
+    }
+    else
+    {
+        this->index = other.index;
+        this->pointer_container = other.pointer_container;
+    }
     return *this;
 }
 
 bool MagicalContainer::AscendingIterator::operator==(const AscendingIterator &other) const
 {
     // Equality operator
+    if (this->index == other.index && this->pointer_container == other.pointer_container)
+    {
+        return true;
+    }
     return false;
 }
 
 bool MagicalContainer::AscendingIterator::operator!=(const AscendingIterator &other) const
 {
     // Inequality operator
+    if (this->index != other.index || this->pointer_container != other.pointer_container)
+    {
+        return true;
+    }
     return false;
 }
 
 int &MagicalContainer::AscendingIterator::operator*()
 {
     // Dereference operator
-    static int dummyValue = 0;
-    return dummyValue;
+    return this->pointer_container->container[this->index];
 }
 
 MagicalContainer::AscendingIterator &MagicalContainer::AscendingIterator::operator++()
 {
     // Pre-increment operator
+    this->index++;
     return *this;
 }
 
 MagicalContainer::AscendingIterator MagicalContainer::AscendingIterator::begin()
 {
     // Begin iterator
+    this->index = 0;
     return *this;
 }
 
 MagicalContainer::AscendingIterator MagicalContainer::AscendingIterator::end()
 {
     // End iterator
+    this->index = this->pointer_container->container.size();
     return *this;
 }
 
