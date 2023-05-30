@@ -1,5 +1,6 @@
 #include "doctest.h"
 #include "sources/MagicalContainer.hpp"
+
 using namespace ariel;
 using namespace std;
 
@@ -60,9 +61,9 @@ TEST_CASE("Check the class MagicalContainer")
         CHECK_NOTHROW(++iter);
         CHECK_EQ(*iter, 25);
         CHECK_NOTHROW(++iter);
-        CHECK_EQ(iter, iter.end());
+        CHECK(iter == iter.end());
         CHECK_NOTHROW(++iter);
-        CHECK_EQ(iter, iter.end());
+        CHECK(iter == iter.end());
     }
 
     SUBCASE("SideCrossIterator")
@@ -87,9 +88,9 @@ TEST_CASE("Check the class MagicalContainer")
         CHECK_NOTHROW(++iter);
         CHECK_EQ(*iter, 9);
         CHECK_NOTHROW(++iter);
-        CHECK_EQ(iter, iter.end());
+        CHECK(iter == iter.end());
         CHECK_NOTHROW(++iter);
-        CHECK_EQ(iter, iter.end());
+        CHECK(iter == iter.end());
     }
 
     SUBCASE("PrimeIterator")
@@ -110,8 +111,8 @@ TEST_CASE("Check the class MagicalContainer")
         CHECK_NOTHROW(++iter);
         CHECK_EQ(*iter, 17);
         CHECK_NOTHROW(++iter);
-        CHECK_EQ(iter, iter.end());
+        CHECK(iter == iter.end());
         CHECK_NOTHROW(++iter);
-        CHECK_EQ(iter, iter.end());
+        CHECK(iter == iter.end());
     }
 }
