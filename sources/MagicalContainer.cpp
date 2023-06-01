@@ -14,28 +14,10 @@ MagicalContainer::MagicalContainer()
 
 void MagicalContainer::addElement(int num)
 {
-    for (unsigned long i = 0; i < this->container.size(); i++)
-    {
-        if (this->container[i] > num)
-        {
-            this->container.insert(this->container.begin() + (long)i, num);
-            return;
-        }
-    }
-    this->container.emplace_back(num);
 }
 
 void MagicalContainer::removeElement(int num)
 {
-    for (size_t i = 0; i < this->container.size(); i++)
-    {
-        if (this->container[i] == num)
-        {
-            this->container.erase(this->container.begin() + (long)i);
-            return;
-        }
-    }
-    throw "Element not found";
 }
 
 int MagicalContainer::size()
@@ -152,7 +134,9 @@ bool MagicalContainer::AscendingIterator::operator<(const MagicalContainer::Asce
 int &MagicalContainer::AscendingIterator::operator*()
 {
     // Dereference operator
-    return this->pointer_container->container[this->index];
+    int x = 5;
+    int *p = &x;
+    return *p;
 }
 
 MagicalContainer::AscendingIterator &MagicalContainer::AscendingIterator::operator++()
